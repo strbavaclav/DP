@@ -10,29 +10,16 @@ import {
   InfoIcon,
 } from "@gluestack-ui/themed";
 import { config } from "@gluestack-ui/config"; // Optional if you want to use default theme
+import { NavigationContainer } from "@react-navigation/native";
+import { MainStackNavigator } from "./src/navigation/main";
+import { AuthStackNavigator } from "./src/navigation/auth";
 
 export default function App() {
   return (
     <GluestackUIProvider config={config}>
-      <View style={styles.container}>
-        <Box width="100%" justifyContent="center" alignItems="center">
-          <Text>Open up App.js to start working on your app!</Text>
-        </Box>
-        <Alert mx="$2.5" action="info" variant="solid">
-          <AlertIcon as={InfoIcon} mr="$3" />
-          <AlertText>TEST</AlertText>
-        </Alert>
-        <StatusBar />
-      </View>
+      <NavigationContainer>
+        <AuthStackNavigator />
+      </NavigationContainer>
     </GluestackUIProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
