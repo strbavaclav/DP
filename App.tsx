@@ -9,7 +9,7 @@ import {
   AlertText,
   InfoIcon,
 } from "@gluestack-ui/themed";
-import { config } from "@gluestack-ui/config"; // Optional if you want to use default theme
+import { config } from "./config/gluestack-ui.config";
 import { NavigationContainer } from "@react-navigation/native";
 import { MainStackNavigator } from "./src/navigation/main";
 import { AuthStackNavigator } from "./src/navigation/auth";
