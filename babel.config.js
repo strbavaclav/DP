@@ -5,7 +5,14 @@ module.exports = function (api) {
     plugins: [
       [
         "module-resolver",
-        { alias: { constants: "./src/constants", screens: "./src/screens" } },
+        {
+          alias: {
+            components: "./src/components",
+            constants: "./src/constants",
+            screens: "./src/screens",
+            assets: "./src/assets",
+          },
+        },
       ],
     ],
   };
