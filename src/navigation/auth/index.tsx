@@ -12,7 +12,7 @@ const AuthStack = createNativeStackNavigator<AuthStackParams>();
 
 const screenOptions = {
   headerShown: false,
-  animation: "simple_push" as StackAnimationTypes,
+  //animation: "fade" as StackAnimationTypes,
 };
 
 export const AuthStackNavigator = () => {
