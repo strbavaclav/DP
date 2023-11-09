@@ -26,16 +26,24 @@ import {
   LockIcon,
   KeyboardAvoidingView,
   ScrollView,
+  EyeIcon,
+  EyeOffIcon,
 } from "@gluestack-ui/themed";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import OAuthButton from "components/auth/OAuthButton";
 import { StatusBar } from "expo-status-bar";
-import React from "react";
+import React, { useState } from "react";
 import { Image, Platform, SafeAreaView } from "react-native";
 import { AuthStackParams } from "src/navigation/auth";
 
 const LoginScreen = () => {
+  const [showPassword, setShowPassword] = useState(false);
+  const handleState = () => {
+    setShowPassword((showState) => {
+      return !showState;
+    });
+  };
   const navigation =
     useNavigation<NativeStackNavigationProp<AuthStackParams>>();
   return (
@@ -62,7 +70,7 @@ const LoginScreen = () => {
           gap={10}
           m={10}
         >
-          <Box width={"$3/4"}>
+          <Box width={"$5/6"}>
             <FormControl
               size="sm"
               isDisabled={false}
@@ -76,8 +84,9 @@ const LoginScreen = () => {
                     <MailIcon size="sm" color="white" />
                   </InputIcon>
                 </InputSlot>
-                <InputSlot width={"$full"}>
+                <InputSlot width={"$5/6"}>
                   <InputField
+                    autoCapitalize={"none"}
                     width={"$full"}
                     type="text"
                     placeholder="your@mail.com"
@@ -93,7 +102,7 @@ const LoginScreen = () => {
               </FormControlError>
             </FormControl>
           </Box>
-          <Box width={"$3/4"}>
+          <Box width={"$5/6"}>
             <FormControl
               size="md"
               isDisabled={false}
@@ -107,8 +116,21 @@ const LoginScreen = () => {
                     <LockIcon color="white" size="sm" />
                   </InputIcon>
                 </InputSlot>
-                <InputSlot width={"$full"}>
-                  <InputField width={"$full"} type="text" placeholder="*****" />
+                <InputSlot width={"$4/6"}>
+                  <InputField
+                    width={"$full"}
+                    type={showPassword ? "text" : "password"}
+                    placeholder="*****"
+                  />
+                </InputSlot>
+                <InputSlot width={"$1/6"} onPress={handleState}>
+                  <InputIcon pr={10}>
+                    {showPassword ? (
+                      <EyeIcon color="grey" />
+                    ) : (
+                      <EyeOffIcon color="$grey" />
+                    )}
+                  </InputIcon>
                 </InputSlot>
               </Input>
 
