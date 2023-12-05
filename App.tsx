@@ -9,6 +9,7 @@ import {
   AlertText,
   InfoIcon,
 } from "@gluestack-ui/themed";
+import "./src/services/i18next";
 import { config } from "./config/gluestack-ui.config";
 import { NavigationContainer } from "@react-navigation/native";
 import { MainStackNavigator } from "./src/navigation/main";
