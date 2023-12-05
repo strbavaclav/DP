@@ -14,12 +14,18 @@ import { config } from "./config/gluestack-ui.config";
 import { NavigationContainer } from "@react-navigation/native";
 import { MainStackNavigator } from "./src/navigation/main";
 import { AuthStackNavigator } from "./src/navigation/auth";
+import { AuthProvider } from "src/context/authContext";
+import { AppProvider } from "src/context/appContext";
 
 export default function App() {
   return (
     <GluestackUIProvider config={config}>
       <NavigationContainer>
-        <AuthStackNavigator />
+        <AuthProvider>
+          <AppProvider>
+            <AuthStackNavigator />
+          </AppProvider>
+        </AuthProvider>
       </NavigationContainer>
     </GluestackUIProvider>
   );
