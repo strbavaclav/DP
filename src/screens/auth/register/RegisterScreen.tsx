@@ -51,7 +51,7 @@ const RegisterScreen = () => {
         resizeMode="contain"
       />
       <Heading>
-        Sign up to <Heading color="$primary500">AppName</Heading>
+        Sign up to <Heading color="$primary500">mealime</Heading>
       </Heading>
       <VStack
         width={"$full"}
@@ -68,9 +68,6 @@ const RegisterScreen = () => {
             isReadOnly={false}
             isRequired={false}
           >
-            <FormControlLabel mb="$1">
-              <FormControlLabelText size="xs">e-mail</FormControlLabelText>
-            </FormControlLabel>
             <Input>
               <InputSlot width={"$1/6"} backgroundColor="$primary500">
                 <InputIcon>
@@ -96,9 +93,6 @@ const RegisterScreen = () => {
             isReadOnly={false}
             isRequired={false}
           >
-            <FormControlLabel mb="$1">
-              <FormControlLabelText size="xs">password</FormControlLabelText>
-            </FormControlLabel>
             <Input>
               <InputSlot width={"$1/6"} backgroundColor="$primary500">
                 <InputIcon>
@@ -106,7 +100,34 @@ const RegisterScreen = () => {
                 </InputIcon>
               </InputSlot>
               <InputSlot>
-                <InputField type="text" placeholder="*****" />
+                <InputField type="password" placeholder="select a password" />
+              </InputSlot>
+            </Input>
+
+            <FormControlError>
+              <FormControlErrorIcon as={AlertCircleIcon} />
+              <FormControlErrorText>
+                At least 6 characters are required.
+              </FormControlErrorText>
+            </FormControlError>
+          </FormControl>
+        </Box>
+        <Box width={"$3/4"}>
+          <FormControl
+            size="md"
+            isDisabled={false}
+            isInvalid={false}
+            isReadOnly={false}
+            isRequired={false}
+          >
+            <Input>
+              <InputSlot width={"$1/6"} backgroundColor="$primary500">
+                <InputIcon>
+                  <LockIcon color="white" size="sm" />
+                </InputIcon>
+              </InputSlot>
+              <InputSlot>
+                <InputField type="password" placeholder="retype password" />
               </InputSlot>
             </Input>
 

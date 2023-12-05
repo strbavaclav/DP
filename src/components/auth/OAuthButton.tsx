@@ -1,11 +1,13 @@
 import { Box, Button, HStack, Text, VStack } from "@gluestack-ui/themed";
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { Image } from "react-native";
 
 const OAuthButton = () => {
+  const { t } = useTranslation();
   return (
     <VStack justifyContent="center" alignItems="center" gap={10}>
-      <Text>- or use -</Text>
+      <Text>- {t("or use")} -</Text>
       <HStack alignItems="center" justifyContent="center" gap={10}>
         <Button size="lg" action="secondary" variant="outline">
           <Image

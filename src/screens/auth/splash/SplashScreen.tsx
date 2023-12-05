@@ -52,7 +52,7 @@ const SplashScreen = () => {
           }}
         >
           <Heading size="4xl" color="white">
-            Splash
+            aChive
           </Heading>
         </Animated.View>
       </Animated.View>
