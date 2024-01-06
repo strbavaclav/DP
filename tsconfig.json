@@ -3,13 +3,16 @@
   "compilerOptions": {
     "jsx": "react-native",
     "strict": true,
-    "baseUrl": ".",
+    "allowJs": true,
+    "skipLibCheck": true,
+    "baseUrl": "src",
     "paths": {
       "components/*": ["./src/components/*"],
       "screens/*": ["./src/screens/*"],
       "assets/*": ["./src/assets/*"],
       "locales/*": ["./src/locales/*"],
-      "services/*": ["./src/services/*"]
+      "services/*": ["./src/services/*"],
+      "context/*": ["./src/context/*"]
     }
   }
 }

@@ -1,0 +1,49 @@
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  update:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🏗 Setup repo
+        uses: actions/checkout@v3
+
+      - name: 🏗 Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+          cache: yarn
+
+      - name: 🏗 Setup EAS
+        uses: expo/expo-github-action@v8
+        with:
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
+
+      - name: 📦 Install dependencies
+        run: yarn install
+
+      - name: 🚀 Create update
+        run: eas update --auto --non-interactive
+
+  notify:
+    name: Slack Notification
+    runs-on: ubuntu-latest
+    needs: update
+    steps:
+    - uses: actions/checkout@v2
+    - name: Slack Notification
+      uses: rtCamp/action-slack-notify@v2
+      env:
+        SLACK_WEBHOOK: https://hooks.slack.com/services/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
+        SLACK_CHANNEL: deploy
+        SLACK_COLOR: ${{ job.status }}
+        SLACK_ICON: https://cdn.icon-icons.com/icons2/2148/PNG/512/expo_icon_132404.png
+        SLACK_MESSAGE: ':rocket: ${{ job.status }}'
+        SLACK_TITLE: New Version Deployed
+        SLACK_USERNAME: Deploy Manager
+        MSG_MINIMAL: commit,actions url

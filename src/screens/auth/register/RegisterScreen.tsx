@@ -51,7 +51,7 @@ const RegisterScreen = () => {
         resizeMode="contain"
       />
       <Heading>
-        Sign up to <Heading color="$primary500">mealime</Heading>
+        Sign up to <Heading color="$primary500">aChive</Heading>
       </Heading>
       <VStack
         width={"$full"}
