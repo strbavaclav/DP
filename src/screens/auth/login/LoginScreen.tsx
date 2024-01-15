@@ -35,6 +35,8 @@ import { useTranslation } from "react-i18next";
 import { Image, Platform, SafeAreaView } from "react-native";
 import { AuthStackParams } from "src/navigation/auth";
 import i18next from "services/i18next";
+import { useMutation } from "@apollo/client";
+import { gql } from "../../../gql/gql";
 
 const LoginScreen = () => {
   const { t } = useTranslation();
@@ -45,8 +47,40 @@ const LoginScreen = () => {
     });
   };
 
+  const CREATE_EVENT_QUERY = gql(/* GraphQL */ `
+    mutation SignUp($authData: SignUpInput!) {
+      signUp(authData: $authData) {
+        username
+        email
+        password
+      }
+    }
+  `);
+
+  const useCreateEvent = () => {
+    const [createEventMutation, createEventResult] =
+      useMutation(CREATE_EVENT_QUERY);
+    return { createEventMutation, createEventResult };
+  };
+
+  const { createEventMutation } = useCreateEvent();
+
   const changeLanguage = (lng: string) => {
     i18next.changeLanguage(lng);
+  };
+
+  const handleLogin = async () => {
+    try {
+      await createEventMutation({
+        variables: {
+          authData: {
+            username: "alfons",
+            email: "alfons@alfons.com",
+            password: "Abeceda123",
+          },
+        },
+      });
+    } catch (err) {}
   };
 
   const navigation =
@@ -155,6 +189,7 @@ const LoginScreen = () => {
               isDisabled={false}
               isFocusVisible={false}
               m={10}
+              onPress={handleLogin}
             >
               <ButtonText>{t("Sign in")} </ButtonText>
               <ButtonIcon as={ChevronsRightIcon} />

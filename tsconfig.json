@@ -12,7 +12,8 @@
       "assets/*": ["./src/assets/*"],
       "locales/*": ["./src/locales/*"],
       "services/*": ["./src/services/*"],
-      "context/*": ["./src/context/*"]
+      "context/*": ["./src/context/*"],
+      "gql/*": ["./src/gql/*"]
     }
   }
 }

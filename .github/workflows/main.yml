@@ -39,7 +39,7 @@ jobs:
     - name: Slack Notification
       uses: rtCamp/action-slack-notify@v2
       env:
-        SLACK_WEBHOOK: https://hooks.slack.com/services/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
+        SLACK_WEBHOOK: https://hooks.slack.com/services/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
         SLACK_CHANNEL: deploy
         SLACK_COLOR: ${{ job.status }}
         SLACK_ICON: https://cdn.icon-icons.com/icons2/2148/PNG/512/expo_icon_132404.png

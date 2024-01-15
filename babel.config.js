@@ -15,6 +15,7 @@ module.exports = function (api) {
             locales: "./src/locales",
             services: "./src/services",
             context: "./src/context",
+            gql: "./src/gql",
           },
         },
       ],
