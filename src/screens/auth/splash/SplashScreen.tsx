@@ -4,7 +4,7 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { StatusBar } from "expo-status-bar";
 import React, { useEffect } from "react";
 import Animated, { useSharedValue, withSpring } from "react-native-reanimated";
-import { AuthStackParams } from "src/navigation/auth";
+import { AuthStackParams } from "navigation/auth";
 
 const SplashScreen = () => {
   const navigation =
