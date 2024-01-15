@@ -3,6 +3,7 @@ import LoginScreen from "screens/auth/login/LoginScreen";
 import RegisterScreen from "screens/auth/register/RegisterScreen";
 import { StackAnimationTypes } from "react-native-screens";
 import SplashScreen from "screens/auth/splash/SplashScreen";
+import OnboardingScreen from "screens/auth/onboard/OnboardingScreen";
 
 export type AuthStackParams = {
   Splash: undefined;
@@ -28,7 +29,7 @@ export const AuthStackNavigator = () => {
         component={LoginScreen}
         options={{ animation: "fade" }}
       />
-      <AuthStack.Screen name="Register" component={RegisterScreen} />
+      <AuthStack.Screen name="Register" component={OnboardingScreen} />
     </AuthStack.Navigator>
   );
 };
