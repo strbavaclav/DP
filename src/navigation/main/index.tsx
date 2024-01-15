@@ -8,12 +8,13 @@ import ProfileScreen from "screens/core/profile/ProfileScreen";
 import MealPlannerScreen from "screens/modules/mealplanning/MealPlannerScreen";
 import EducationScreen from "screens/modules/education/EducationScreen";
 import { Route, RouteProp } from "@react-navigation/native";
-import { Ionicons } from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { ReactNode } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import CustomDrawer from "components/navigation/CustomDrawer";
 import DrawerScreenWrapper from "components/navigation/DrawerScreenWrapper";
+import AboutScreen from "screens/core/about/AboutScreen";
 
 type Props = { children: ReactNode };
 
@@ -27,6 +28,7 @@ export type MainTabsParams = {
 export type MainDrawerParams = {
   Main: undefined;
   Settings: undefined;
+  About: undefined;
 };
 
 const MainTab = createBottomTabNavigator<MainTabsParams>();
@@ -43,25 +45,27 @@ const TabScreenOptions = ({
     let iconColor: string;
 
     if (route.name === "Home") {
-      iconName = focused ? "ios-home" : "ios-home-outline";
+      iconName = "dashboard";
       iconColor = focused ? "#10b981" : "#555";
     } else if (route.name === "Profile") {
-      iconName = focused ? "ios-list" : "ios-list-outline";
+      iconName = focused ? "person" : "person-outline";
       iconColor = focused ? "#10b981" : "#555";
     } else if (route.name === "Planner") {
-      iconName = focused ? "ios-list" : "ios-list-outline";
+      iconName = "access-time";
       iconColor = focused ? "#10b981" : "#555";
     } else if (route.name === "Education") {
-      iconName = focused ? "ios-list" : "ios-list-outline";
+      iconName = "library-books";
       iconColor = focused ? "#10b981" : "#555";
     } else {
       iconName = "ios-alert";
       iconColor = "#555";
     }
 
-    return <Ionicons name={iconName as "key"} size={size} color={iconColor} />;
+    return (
+      <MaterialIcons name={iconName as "tab"} size={size} color={iconColor} />
+    );
   },
-  tabBarLabel: route.name,
+  tabBarLabel: route.name === "Home" ? "Dashboard" : route.name,
   tabBarActiveTintColor: "#10b981",
   headerShown: false,
   tabBarStyle: {
@@ -83,9 +87,9 @@ export const MainTabNavigator = () => {
         screenOptions={TabScreenOptions}
       >
         <MainTab.Screen name="Home" component={HomeScreen} />
-        <MainTab.Screen name="Profile" component={ProfileScreen} />
         <MainTab.Screen name="Planner" component={MealPlannerScreen} />
         <MainTab.Screen name="Education" component={EducationScreen} />
+        <MainTab.Screen name="Profile" component={ProfileScreen} />
       </MainTab.Navigator>
     </DrawerScreenWrapper>
   );
@@ -113,6 +117,11 @@ export const MainDrawerNavigator = () => {
         <MainDrawer.Screen
           name={"Main"}
           component={MainTabNavigator}
+          options={{ headerTitle: "" }}
+        />
+        <MainDrawer.Screen
+          name={"About"}
+          component={AboutScreen}
           options={{ headerTitle: "" }}
         />
       </MainDrawer.Navigator>

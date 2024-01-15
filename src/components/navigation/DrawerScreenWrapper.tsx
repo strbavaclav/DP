@@ -1,4 +1,5 @@
 import { Ionicons } from "@expo/vector-icons";
+import { HStack, Text } from "@gluestack-ui/themed";
 import { useDrawerProgress } from "@react-navigation/drawer";
 import { DrawerActions, useNavigation } from "@react-navigation/native";
 import React, { ReactNode } from "react";
@@ -41,16 +42,16 @@ const DrawerScreenWrapper: React.FC<Props> = ({ children }) => {
         animatedStyle,
       ]}
     >
-      <TouchableOpacity
-        onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
-      >
-        <Ionicons
-          name={"menu"}
-          size={26}
-          style={{ marginTop: 40, marginLeft: 15 }}
-          color={"#10b981"}
-        />
-      </TouchableOpacity>
+      <HStack style={{ marginTop: 40, marginLeft: 15 }}>
+        <TouchableOpacity
+          onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
+        >
+          <Ionicons name={"menu"} size={26} color={"#10b981"} />
+        </TouchableOpacity>
+        <Text ml={130} mt={5} color="green">
+          aChive
+        </Text>
+      </HStack>
       {children}
     </Animated.View>
   );
