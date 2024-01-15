@@ -1,6 +1,6 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { AuthStackNavigator } from "navigation/auth";
-import { MainTabNavigator } from "navigation/main";
+import { MainDrawerNavigator, MainTabNavigator } from "navigation/main";
 
 export type RootStackParams = {
   AuthNavigator: undefined;
@@ -20,7 +20,10 @@ export const RootStackNavigator = () => {
         name="AuthNavigator"
         component={AuthStackNavigator}
       />
-      <RootNavigator.Screen name="MainNavigator" component={MainTabNavigator} />
+      <RootNavigator.Screen
+        name="MainNavigator"
+        component={MainDrawerNavigator}
+      />
     </RootNavigator.Navigator>
   );
 };
