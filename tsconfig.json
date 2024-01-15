@@ -9,13 +9,19 @@
     "skipLibCheck": true,
     "baseUrl": "src",
     "paths": {
-      "components/*": ["./components/*"],
-      "screens/*": ["./screens/*"],
       "assets/*": ["./assets/*"],
-      "locales/*": ["./locales/*"],
-      "services/*": ["./services/*"],
+      "components/*": ["./components/*"],
+      "constants/*": ["./constants/*"],
       "context/*": ["./context/*"],
-      "gql/*": ["./gql/*"]
+      "data/*": ["./data/*"],
+      "gql/*": ["./gql/*"],
+      "hooks/*": ["./hooks/*"],
+      "locales/*": ["./locales/*"],
+      "navigation/*": ["./navigation/*"],
+      "screens/*": ["./screens/*"],
+      "services/*": ["./services/*"],
+      "styles/*": ["./styles/*"],
+      "types/*": ["./types/*"]
     }
   }
 }
