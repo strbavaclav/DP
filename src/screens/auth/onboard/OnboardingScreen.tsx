@@ -1,3 +1,6 @@
+import { CommonActions, useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { RootStackParams } from "navigation/root";
 import React, { useState } from "react";
 import { View, Text, TextInput, Button, StyleSheet } from "react-native";
 
@@ -9,13 +12,21 @@ const OnboardingScreen = () => {
     healthGoal: "",
   });
 
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParams>>();
+
   const handleInputChange = (name: string, value: string) => {
     setUserData({ ...userData, [name]: value });
   };
 
   const handleSubmit = () => {
-    console.log(userData); // Here, you would typically send this data to your backend or store it locally
-    // Navigate to the next screen or show a confirmation message
+    console.log(userData);
+    navigation.dispatch(
+      CommonActions.reset({
+        index: 0,
+        routes: [{ name: "MainNavigator" }],
+      })
+    );
   };
 
   return (

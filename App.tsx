@@ -7,6 +7,7 @@ import { AuthProvider } from "./src/context/authContext";
 import { AppProvider } from "./src/context/appContext";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import React from "react";
+import { RootStackNavigator } from "navigation/root";
 
 // Initialize Apollo Client
 const client = new ApolloClient({
@@ -21,7 +22,7 @@ export default function App() {
         <NavigationContainer>
           <AuthProvider>
             <AppProvider>
-              <AuthStackNavigator />
+              <RootStackNavigator />
             </AppProvider>
           </AuthProvider>
         </NavigationContainer>

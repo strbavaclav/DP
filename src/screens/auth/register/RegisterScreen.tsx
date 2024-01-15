@@ -35,12 +35,32 @@ import React from "react";
 import { Image } from "react-native";
 
 import { AuthStackParams } from "navigation/auth";
+import { useSignUp } from "calls/auth/register/useSignUp";
 
 const image = require("../../../assets/images/register.png");
 
 const RegisterScreen = () => {
   const navigation =
     useNavigation<NativeStackNavigationProp<AuthStackParams>>();
+
+  const { signUpMutation, signUpResult } = useSignUp();
+
+  const handleSignUp = () => {
+    try {
+      // signUpMutation({
+      //   variables: {
+      //     authData: {
+      //       email: "test@test.cz",
+      //       username: "test",
+      //       password: "Abeceda123",
+      //     },
+      //   },
+      // });
+      navigation.navigate("Onboarding");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
@@ -147,6 +167,7 @@ const RegisterScreen = () => {
         isDisabled={false}
         isFocusVisible={false}
         m={10}
+        onPress={handleSignUp}
       >
         <ButtonText>Sign up </ButtonText>
         <ButtonIcon as={ChevronsRightIcon} />

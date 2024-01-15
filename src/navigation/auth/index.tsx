@@ -9,6 +9,7 @@ export type AuthStackParams = {
   Splash: undefined;
   Register: undefined;
   Login: undefined;
+  Onboarding: undefined;
 };
 
 const AuthStack = createNativeStackNavigator<AuthStackParams>();
@@ -29,7 +30,8 @@ export const AuthStackNavigator = () => {
         component={LoginScreen}
         options={{ animation: "fade" }}
       />
-      <AuthStack.Screen name="Register" component={OnboardingScreen} />
+      <AuthStack.Screen name="Register" component={RegisterScreen} />
+      <AuthStack.Screen name="Onboarding" component={OnboardingScreen} />
     </AuthStack.Navigator>
   );
 };

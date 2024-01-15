@@ -35,8 +35,7 @@ import { useTranslation } from "react-i18next";
 import { Image, Platform, SafeAreaView } from "react-native";
 import { AuthStackParams } from "navigation/auth";
 import i18next from "services/i18next";
-import { useMutation } from "@apollo/client";
-import { gql } from "gql/gql";
+import { useSignIn } from "calls/auth/login/useSignIn";
 
 const LoginScreen = () => {
   const { t } = useTranslation();
@@ -47,23 +46,7 @@ const LoginScreen = () => {
     });
   };
 
-  const CREATE_EVENT_QUERY = gql(/* GraphQL */ `
-    mutation SignUp($authData: SignUpInput!) {
-      signUp(authData: $authData) {
-        username
-        email
-        password
-      }
-    }
-  `);
-
-  const useCreateEvent = () => {
-    const [createEventMutation, createEventResult] =
-      useMutation(CREATE_EVENT_QUERY);
-    return { createEventMutation, createEventResult };
-  };
-
-  const { createEventMutation } = useCreateEvent();
+  const { signInMutation, signInResult } = useSignIn();
 
   const changeLanguage = (lng: string) => {
     i18next.changeLanguage(lng);
@@ -71,16 +54,15 @@ const LoginScreen = () => {
 
   const handleLogin = async () => {
     try {
-      await createEventMutation({
+      await signInMutation({
         variables: {
-          authData: {
-            username: "alfons",
-            email: "alfons@alfons.com",
-            password: "Abeceda123",
-          },
+          email: "test@test.cz",
+          password: "Abeceda1234",
         },
       });
-    } catch (err) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const navigation =

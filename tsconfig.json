@@ -9,6 +9,7 @@
     "skipLibCheck": true,
     "baseUrl": "src",
     "paths": {
+      "calls/*": ["./calls/*"],
       "assets/*": ["./assets/*"],
       "components/*": ["./components/*"],
       "constants/*": ["./constants/*"],
