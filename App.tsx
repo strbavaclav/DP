@@ -6,6 +6,7 @@ import { AuthStackNavigator } from "./src/navigation/auth";
 import { AuthProvider } from "./src/context/authContext";
 import { AppProvider } from "./src/context/appContext";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
+import React from "react";
 
 // Initialize Apollo Client
 const client = new ApolloClient({

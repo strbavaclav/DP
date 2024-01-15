@@ -34,7 +34,7 @@ import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { Image } from "react-native";
 
-import { AuthStackParams } from "src/navigation/auth";
+import { AuthStackParams } from "navigation/auth";
 
 const image = require("../../../assets/images/register.png");
 

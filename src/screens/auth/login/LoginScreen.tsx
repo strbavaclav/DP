@@ -33,10 +33,10 @@ import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Image, Platform, SafeAreaView } from "react-native";
-import { AuthStackParams } from "src/navigation/auth";
+import { AuthStackParams } from "navigation/auth";
 import i18next from "services/i18next";
 import { useMutation } from "@apollo/client";
-import { gql } from "../../../gql/gql";
+import { gql } from "gql/gql";
 
 const LoginScreen = () => {
   const { t } = useTranslation();
