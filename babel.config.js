@@ -8,6 +8,7 @@ module.exports = function (api) {
         "module-resolver",
         {
           alias: {
+            calls: "./src/calls",
             assets: "./src/assets",
             components: "./src/components",
             constants: "./src/constants",
