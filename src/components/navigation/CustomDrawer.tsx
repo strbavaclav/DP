@@ -9,8 +9,13 @@ type Props = {
 type CustomDrawerItemProps = {
   label: string;
   icon: string;
+  navigate?: () => void;
 };
-const CustomDrawerItem: React.FC<CustomDrawerItemProps> = ({ label, icon }) => {
+const CustomDrawerItem: React.FC<CustomDrawerItemProps> = ({
+  label,
+  icon,
+  navigate,
+}) => {
   return (
     <TouchableOpacity
       style={{
@@ -21,6 +26,7 @@ const CustomDrawerItem: React.FC<CustomDrawerItemProps> = ({ label, icon }) => {
         paddingLeft: 10,
         borderRadius: 10,
       }}
+      onPress={navigate}
     >
       {/*@ts-ignore*/}
       <Ionicons name={icon} size={20} color={"white"} />
@@ -55,7 +61,7 @@ const CustomDrawer: React.FC<Props> = ({ navigation }) => {
             alignItems: "center",
             marginLeft: 10,
           }}
-          onPress={() => navigation.navigate("profile")}
+          onPress={() => navigation.navigate("Profile")}
         >
           <View
             style={{
@@ -78,9 +84,24 @@ const CustomDrawer: React.FC<Props> = ({ navigation }) => {
           </View>
         </TouchableOpacity>
         <View style={{ flex: 1, marginTop: 20, marginLeft: 10 }}>
-          <CustomDrawerItem label={"Dashboard"} icon={"home"} />
+          <CustomDrawerItem
+            label={"Dashboard"}
+            icon={"home"}
+            navigate={() => navigation.navigate("Home")}
+          />
+          <CustomDrawerItem label={"Recipes"} icon={"bookmarks"} />
+          <CustomDrawerItem label={"Shoping list"} icon={"cart"} />
+          <CustomDrawerItem label={"Supplies"} icon={"file-tray"} />
+          <CustomDrawerItem
+            label={"Stress relief"}
+            icon={"battery-full-outline"}
+          />
           <CustomDrawerItem label={"Settings"} icon={"settings"} />
-          <CustomDrawerItem label={"Recipes"} icon={"list-outline"} />
+          <CustomDrawerItem
+            label={"About"}
+            icon={"information-circle"}
+            navigate={() => navigation.navigate("About")}
+          />
           <View
             style={{
               height: 1,
@@ -89,7 +110,7 @@ const CustomDrawer: React.FC<Props> = ({ navigation }) => {
               backgroundColor: "white",
             }}
           />
-          <CustomDrawerItem label={"Something else"} icon={"add-outline"} />
+          <CustomDrawerItem label={"Sign out"} icon={"exit-outline"} />
         </View>
       </View>
     </View>
