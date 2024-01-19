@@ -1,6 +1,3 @@
-import { CommonActions, useNavigation } from "@react-navigation/native";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { RootStackParams } from "navigation/root";
 import React, { useState } from "react";
 import { View, Text, TextInput, Button, StyleSheet } from "react-native";
 
@@ -12,22 +9,11 @@ const OnboardingScreen = () => {
     healthGoal: "",
   });
 
-  const navigation =
-    useNavigation<NativeStackNavigationProp<RootStackParams>>();
-
   const handleInputChange = (name: string, value: string) => {
     setUserData({ ...userData, [name]: value });
   };
 
-  const handleSubmit = () => {
-    console.log(userData);
-    navigation.dispatch(
-      CommonActions.reset({
-        index: 0,
-        routes: [{ name: "MainNavigator" }],
-      })
-    );
-  };
+  const handleSubmit = () => {};
 
   return (
     <View style={styles.container}>

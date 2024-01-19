@@ -42,8 +42,7 @@ export type Mutation_EmptyArgs = {
 };
 
 export type MutationSignInArgs = {
-  email: Scalars["String"]["input"];
-  password: Scalars["String"]["input"];
+  authData: SignInInput;
 };
 
 export type MutationSignOutArgs = {
@@ -66,6 +65,11 @@ export type QueryGetUserArgs = {
   id: Scalars["ID"]["input"];
 };
 
+export type SignInInput = {
+  email: Scalars["String"]["input"];
+  password: Scalars["String"]["input"];
+};
+
 export type SignUpInput = {
   email: Scalars["String"]["input"];
   password: Scalars["String"]["input"];
@@ -76,21 +80,22 @@ export type User = {
   __typename?: "User";
   email: Scalars["String"]["output"];
   password: Scalars["String"]["output"];
+  token?: Maybe<Scalars["String"]["output"]>;
   username: Scalars["String"]["output"];
 };
 
-export type MutationMutationVariables = Exact<{
-  email: Scalars["String"]["input"];
-  password: Scalars["String"]["input"];
+export type SignInMutationVariables = Exact<{
+  authData: SignInInput;
 }>;
 
-export type MutationMutation = {
+export type SignInMutation = {
   __typename?: "Mutation";
   signIn?: {
     __typename?: "User";
     username: string;
     email: string;
     password: string;
+    token?: string | null;
   } | null;
 };
 
@@ -108,39 +113,25 @@ export type SignUpMutation = {
   } | null;
 };
 
-export const MutationDocument = {
+export const SignInDocument = {
   kind: "Document",
   definitions: [
     {
       kind: "OperationDefinition",
       operation: "mutation",
-      name: { kind: "Name", value: "Mutation" },
+      name: { kind: "Name", value: "SignIn" },
       variableDefinitions: [
         {
           kind: "VariableDefinition",
           variable: {
             kind: "Variable",
-            name: { kind: "Name", value: "email" },
+            name: { kind: "Name", value: "authData" },
           },
           type: {
             kind: "NonNullType",
             type: {
               kind: "NamedType",
-              name: { kind: "Name", value: "String" },
-            },
-          },
-        },
-        {
-          kind: "VariableDefinition",
-          variable: {
-            kind: "Variable",
-            name: { kind: "Name", value: "password" },
-          },
-          type: {
-            kind: "NonNullType",
-            type: {
-              kind: "NamedType",
-              name: { kind: "Name", value: "String" },
+              name: { kind: "Name", value: "SignInInput" },
             },
           },
         },
@@ -154,18 +145,10 @@ export const MutationDocument = {
             arguments: [
               {
                 kind: "Argument",
-                name: { kind: "Name", value: "email" },
+                name: { kind: "Name", value: "authData" },
                 value: {
                   kind: "Variable",
-                  name: { kind: "Name", value: "email" },
-                },
-              },
-              {
-                kind: "Argument",
-                name: { kind: "Name", value: "password" },
-                value: {
-                  kind: "Variable",
-                  name: { kind: "Name", value: "password" },
+                  name: { kind: "Name", value: "authData" },
                 },
               },
             ],
@@ -175,6 +158,7 @@ export const MutationDocument = {
                 { kind: "Field", name: { kind: "Name", value: "username" } },
                 { kind: "Field", name: { kind: "Name", value: "email" } },
                 { kind: "Field", name: { kind: "Name", value: "password" } },
+                { kind: "Field", name: { kind: "Name", value: "token" } },
               ],
             },
           },
@@ -182,7 +166,7 @@ export const MutationDocument = {
       },
     },
   ],
-} as unknown as DocumentNode<MutationMutation, MutationMutationVariables>;
+} as unknown as DocumentNode<SignInMutation, SignInMutationVariables>;
 export const SignUpDocument = {
   kind: "Document",
   definitions: [

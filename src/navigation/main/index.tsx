@@ -7,7 +7,6 @@ import {
 import ProfileScreen from "screens/core/profile/ProfileScreen";
 import MealPlannerScreen from "screens/modules/mealplanning/MealPlannerScreen";
 import EducationScreen from "screens/modules/education/EducationScreen";
-import { Route, RouteProp } from "@react-navigation/native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { ReactNode } from "react";
@@ -75,13 +74,13 @@ const TabScreenOptions = ({
     borderBottomLeftRadius: 15,
     shadowRadius: 5,
     borderTopWidth: 1,
-    backgroundColor: "transparent",
+    backgroundColor: "white",
   },
 });
 
 export const MainTabNavigator = () => {
   return (
-    <DrawerScreenWrapper>
+    <DrawerScreenWrapper isNotification>
       <MainTab.Navigator
         initialRouteName="Home"
         screenOptions={TabScreenOptions}
@@ -99,6 +98,7 @@ export const MainDrawerNavigator = () => {
   return (
     <LinearGradient style={{ flex: 1 }} colors={["#10b981", "#46bfa7"]}>
       <MainDrawer.Navigator
+        initialRouteName="Main"
         drawerContent={(props) => {
           return <CustomDrawer navigation={props.navigation} />;
         }}
