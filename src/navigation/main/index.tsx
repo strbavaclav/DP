@@ -14,6 +14,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import CustomDrawer from "components/navigation/CustomDrawer";
 import DrawerScreenWrapper from "components/navigation/DrawerScreenWrapper";
 import AboutScreen from "screens/core/about/AboutScreen";
+import ShoppingListScreen from "screens/modules/shopping/ShoppingListScreen";
 
 type Props = { children: ReactNode };
 
@@ -28,6 +29,7 @@ export type MainDrawerParams = {
   Main: undefined;
   Settings: undefined;
   About: undefined;
+  Shopping: undefined;
 };
 
 const MainTab = createBottomTabNavigator<MainTabsParams>();
@@ -122,6 +124,11 @@ export const MainDrawerNavigator = () => {
         <MainDrawer.Screen
           name={"About"}
           component={AboutScreen}
+          options={{ headerTitle: "" }}
+        />
+        <MainDrawer.Screen
+          name={"Shopping"}
+          component={ShoppingListScreen}
           options={{ headerTitle: "" }}
         />
       </MainDrawer.Navigator>
