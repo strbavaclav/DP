@@ -1,11 +1,14 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
+import DrawerScreenWrapper from "components/navigation/DrawerScreenWrapper";
 
 const ShoppingListScreen = () => {
   return (
-    <View>
-      <Text>ShoppingListScreen</Text>
-    </View>
+    <DrawerScreenWrapper isBack>
+      <View>
+        <Text>ShoppingListScreen</Text>
+      </View>
+    </DrawerScreenWrapper>
   );
 };
 
