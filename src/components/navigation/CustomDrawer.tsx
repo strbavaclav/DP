@@ -1,5 +1,6 @@
 import { Ionicons } from "@expo/vector-icons";
 import { DrawerNavigationHelpers } from "@react-navigation/drawer/lib/typescript/src/types";
+import { useAuth } from "context/authContext";
 import React from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 
@@ -37,6 +38,8 @@ const CustomDrawerItem: React.FC<CustomDrawerItemProps> = ({
   );
 };
 const CustomDrawer: React.FC<Props> = ({ navigation }) => {
+  const { onSignOut } = useAuth();
+
   return (
     <View
       style={{
@@ -110,7 +113,11 @@ const CustomDrawer: React.FC<Props> = ({ navigation }) => {
               backgroundColor: "white",
             }}
           />
-          <CustomDrawerItem label={"Sign out"} icon={"exit-outline"} />
+          <CustomDrawerItem
+            label={"Sign out"}
+            icon={"exit-outline"}
+            navigate={onSignOut}
+          />
         </View>
       </View>
     </View>

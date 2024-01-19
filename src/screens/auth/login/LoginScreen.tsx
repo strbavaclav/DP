@@ -35,7 +35,9 @@ import { useTranslation } from "react-i18next";
 import { Image, Platform, SafeAreaView } from "react-native";
 import { AuthStackParams } from "navigation/auth";
 import i18next from "services/i18next";
-import { useSignIn } from "calls/auth/login/useSignIn";
+import { Controller, useForm } from "react-hook-form";
+import { SignInInputs } from "types/auth/SignIn";
+import { useAuth } from "context/authContext";
 
 const LoginScreen = () => {
   const { t } = useTranslation();
@@ -46,20 +48,26 @@ const LoginScreen = () => {
     });
   };
 
-  const { signInMutation, signInResult } = useSignIn();
+  const { onSignIn } = useAuth();
 
   const changeLanguage = (lng: string) => {
     i18next.changeLanguage(lng);
   };
 
-  const handleLogin = async () => {
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<SignInInputs>({
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
+
+  const handleLogin = async (data: SignInInputs) => {
     try {
-      await signInMutation({
-        variables: {
-          email: "test@test.cz",
-          password: "Abeceda1234",
-        },
-      });
+      await onSignIn!(data.email, data.password);
     } catch (error) {
       console.log(error);
     }
@@ -106,12 +114,20 @@ const LoginScreen = () => {
                       <MailIcon size="sm" color="white" />
                     </InputIcon>
                   </InputSlot>
-                  <InputSlot width={"$5/6"}>
-                    <InputField
-                      autoCapitalize={"none"}
-                      width={"$full"}
-                      type="text"
-                      placeholder={t("your@mail.cz")}
+                  <InputSlot>
+                    <Controller
+                      control={control}
+                      rules={{ required: true }} // Add your validation rules
+                      render={({ field: { onChange, onBlur, value } }) => (
+                        <InputField
+                          autoCapitalize="none"
+                          onBlur={onBlur}
+                          onChangeText={onChange}
+                          value={value}
+                          placeholder={t("your@mail.cz")}
+                        />
+                      )}
+                      name="email"
                     />
                   </InputSlot>
                 </Input>
@@ -139,10 +155,21 @@ const LoginScreen = () => {
                     </InputIcon>
                   </InputSlot>
                   <InputSlot width={"$4/6"}>
-                    <InputField
-                      width={"$full"}
-                      type={showPassword ? "text" : "password"}
-                      placeholder={t("password")}
+                    <Controller
+                      control={control}
+                      rules={{ required: true }} // Add your validation rules
+                      render={({ field: { onChange, onBlur, value } }) => (
+                        <InputField
+                          autoCapitalize="none"
+                          onBlur={onBlur}
+                          onChangeText={onChange}
+                          value={value}
+                          width={"$full"}
+                          type={showPassword ? "text" : "password"}
+                          placeholder={t("password")}
+                        />
+                      )}
+                      name="password"
                     />
                   </InputSlot>
                   <InputSlot width={"$1/6"} onPress={handleState}>
@@ -171,7 +198,7 @@ const LoginScreen = () => {
               isDisabled={false}
               isFocusVisible={false}
               m={10}
-              onPress={handleLogin}
+              onPress={handleSubmit(handleLogin)}
             >
               <ButtonText>{t("Sign in")} </ButtonText>
               <ButtonIcon as={ChevronsRightIcon} />

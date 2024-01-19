@@ -1,9 +1,10 @@
 import { Ionicons } from "@expo/vector-icons";
-import { HStack, Text } from "@gluestack-ui/themed";
+import { Box, HStack, Text } from "@gluestack-ui/themed";
 import { useDrawerProgress } from "@react-navigation/drawer";
 import { DrawerActions, useNavigation } from "@react-navigation/native";
 import React, { ReactNode } from "react";
 import { TouchableOpacity } from "react-native";
+import Constants from "expo-constants";
 import Animated, {
   interpolate,
   useAnimatedStyle,
@@ -11,8 +12,15 @@ import Animated, {
 
 type Props = {
   children: ReactNode;
+  isBack?: boolean;
+  isNotification?: boolean;
 };
-const DrawerScreenWrapper: React.FC<Props> = ({ children }) => {
+const DrawerScreenWrapper: React.FC<Props> = ({
+  children,
+  isBack,
+  isNotification,
+}) => {
+  const statusBarHeight = Constants.statusBarHeight;
   const progress = useDrawerProgress();
 
   const navigation = useNavigation();
@@ -42,15 +50,52 @@ const DrawerScreenWrapper: React.FC<Props> = ({ children }) => {
         animatedStyle,
       ]}
     >
-      <HStack style={{ marginTop: 40, marginLeft: 15 }}>
+      <HStack
+        style={{
+          marginTop: statusBarHeight,
+          paddingHorizontal: 10,
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}
+      >
         <TouchableOpacity
+          style={{ flex: 1 }}
           onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
         >
           <Ionicons name={"menu"} size={26} color={"#10b981"} />
         </TouchableOpacity>
-        <Text ml={130} mt={5} color="green">
-          aChive
-        </Text>
+        <Box style={{ flex: 1, justifyContent: "center" }}>
+          <Text textAlign="center" bold size="lg" color="#10b981">
+            aChive
+          </Text>
+        </Box>
+
+        <Box
+          style={{
+            flex: 1,
+            justifyContent: "flex-end",
+            alignItems: "flex-end",
+          }}
+        >
+          {isBack && (
+            <TouchableOpacity onPress={() => navigation.goBack()}>
+              <Ionicons
+                name={"arrow-back-circle-outline"}
+                size={26}
+                color={"#10b981"}
+              />
+            </TouchableOpacity>
+          )}
+          {isNotification && (
+            <TouchableOpacity onPress={() => console.log("open something")}>
+              <Ionicons
+                name={"notifications-outline"}
+                size={24}
+                color={"#10b981"}
+              />
+            </TouchableOpacity>
+          )}
+        </Box>
       </HStack>
       {children}
     </Animated.View>
